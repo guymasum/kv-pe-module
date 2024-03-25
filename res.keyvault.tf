@@ -1,6 +1,6 @@
 locals {
-    key_vault_name = "${local.prefix_keyvault}-87978-${var.environment_name}"
-    # key_vault_firewall_allow_list = [ local.build_agent_ip ]
+    key_vault_name = "${local.prefix_keyvault}-${local.product_name}-${var.environment_name}"
+    key_vault_firewall_allow_list = [ local.build_agent_ip ]
 
     keyvault_private_link = var.private_endpoint_dns_list["keyvault"].private_link
 
@@ -33,9 +33,8 @@ resource "azurerm_key_vault" "ais_key_vault" {
 
         ]
 
-    #  #   ip_rules = local.key_vault_firewall_allow_list
+       ip_rules = local.key_vault_firewall_allow_list
 
-         ip_rules = ["173.66.183.202"]
        }
 
     tags = merge(
