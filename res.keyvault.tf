@@ -8,17 +8,17 @@ locals {
 
 resource "azurerm_key_vault" "ais_key_vault" {
     name                = local.key_vault_name
-    location            = data.azurerm_resource_group.ais_resource_group.location
-    resource_group_name = data.azurerm_resource_group.ais_resource_group.name
+    location            = data.azurerm_resource_group.ais_kv_resource_group.location
+    resource_group_name = data.azurerm_resource_group.ais_kv_resource_group.name
 
     sku_name = "standard"
 
-    enable_rbac_authorization       = false
+    enable_rbac_authorization       = true
     enabled_for_deployment          = true
     enabled_for_template_deployment = true
     enabled_for_disk_encryption     = true
     tenant_id                       = data.azurerm_client_config.current.tenant_id
-    soft_delete_retention_days      = 7
+    soft_delete_retention_days      = 90
     purge_protection_enabled        = true
 
     network_acls {
@@ -40,21 +40,22 @@ resource "azurerm_key_vault" "ais_key_vault" {
     tags = merge(
         var.default_tags,
         {
-            logicalResourceName = "AIS KeyVault"
+           /* logicalResourceName = "AIS KeyVault"
             UsedBy = "Various interfaces"
             Description = "Secrets and Certs for the AIS platform"
             TerraformReference = "azurerm_key_vault.ais_key_vault"
+            */
         }
     )
 }
 
-#data "azurerm_client_config" "current" {}
+resource "azurerm_role_assignment" "keyvault_admin" {
+  scope = azurerm_key_vault.ais_key_vault.id
+  role_definition_id = "/subscriptions/8b4e9200-3cc7-4616-85a2-2437458a179f/providers/Microsoft.Authorization/roleDefinitions/00482a5a-887f-4fb3-b363-3b7fe8e74483"
+  principal_id = var.admin_user_id
+} 
 
-# resource "azurerm_role_assignment" "role-secret-officer" {
-#   role_definition_name = "Key Vault Secrets Officer"
-#   principal_id         = data.azurerm_client_config.current.object_id
-#   scope                = azurerm_key_vault.ais_key_vault.id
-# }
+
 
 
 module "keyvault_private_endpoint" {
@@ -64,8 +65,7 @@ module "keyvault_private_endpoint" {
     resource_group_location         = azurerm_key_vault.ais_key_vault.location
     resource_name                   = azurerm_key_vault.ais_key_vault.name
     resource_id                     = azurerm_key_vault.ais_key_vault.id
-    #private_endpoint_subnet_id      = azurerm_subnet.private_endpoints.id
-    private_endpoint_subnet_id      = data.azurerm_subnet.private_endpoints.id
+    private_endpoint_subnet_id      = azurerm_subnet.private_endpoints.id
     sub_resource_name               = "vault"
 
     dns_c_name_zone_name            = azurerm_private_dns_zone.ais_dns.name
@@ -78,16 +78,15 @@ module "keyvault_private_endpoint" {
 }
 
 #Add a test secret so we can use this to check network connectivity
-# resource "azurerm_key_vault_secret" "test_secret" {
+resource "azurerm_key_vault_secret" "test_secret" {
 
-#     name         = "KVS-Test-Secret2"
-#     value        = "Networking test secret setup by terraform"
-#     key_vault_id = azurerm_key_vault.ais_key_vault.id
+   name         = "KVS-Test-Secret2"
+  value        = "Networking test secret setup by terraform"
+  key_vault_id = azurerm_key_vault.ais_key_vault.id
 
 
-#     #Make sure this explicitly waits for the keyvault creation to complete
-#     depends_on = [
-#         azurerm_key_vault.ais_key_vault
-#     ]
-# }
-
+    #Make sure this explicitly waits for the keyvault creation to complete
+    depends_on = [
+        azurerm_key_vault.ais_key_vault
+    ]
+ }

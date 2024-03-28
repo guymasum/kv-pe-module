@@ -1,22 +1,20 @@
-In thi folder we will have the sample terraform solution for building a logic app AIS solution running on an App Service Environment
+# Introduction 
+TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
 
-For more info refer to this video
+# Getting Started
+TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
+1.	Installation process
+2.	Software dependencies
+3.	Latest releases
+4.	API references
 
-https://www.youtube.com/watch?v=-FOMUzutg1M
+# Build and Test
+TODO: Describe and show how to build your code and run the tests. 
 
-Also refer to this playlist for more about Logic Apps with ASE
+# Contribute
+TODO: Explain how other users and developers can contribute to make your code better. 
 
-https://www.youtube.com/watch?v=EbgwfEvxQ2w&list=PLa-4Z1GMFicDunPRDySZnSNu6Js29i9ez
-
-
-# Notes for running terraform in VS Code
-
-- cd .
-- az login 
-- az account set --subscription "[Your sub id]"
-- terraform init
-- terraform validate
-- terraform refresh -var-file="local.tfvars"
-- terraform plan -var-file="local.tfvars"
-- terraform apply -var-file="local.tfvars"
-  
+If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
+- [ASP.NET Core](https://github.com/aspnet/Home)
+- [Visual Studio Code](https://github.com/Microsoft/vscode)
+- [Chakra Core](https://github.com/Microsoft/ChakraCore)

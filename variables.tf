@@ -24,6 +24,18 @@ variable "main_resource_group" {
   # default     = ""
 }
 
+variable "kv_resource_group" {
+  description = "The name of the Key Vault resource group"
+  # default     = "rg-automation-deployment"
+}
+
+variable "admin_user_id" {
+
+  default ="a5942791-ca40-439b-869a-5dbfca1f1049"
+}
+
+
+
 variable "main_virtual_network" {
   description = "The name of the virtual network"
 #  default     = "Vnet1"
@@ -32,9 +44,10 @@ variable "main_virtual_network" {
 variable "default_tags" {
     type = map
     default = {
-        Environment = "__CommonSetting_EnvironmentName_LowerCase__"
-        deployed_by = "terraform"
-        Application = "Azure Integration Services"
+        projectcode = "NA"
+        businessapp = "terraform"
+        contact = "AzureSupport@imf.org"
+        changerequest = "#"
     }
 }
 

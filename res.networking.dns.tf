@@ -1,5 +1,5 @@
 locals {
-    ais_dns_name = "imf.org"
+    ais_dns_name = "privatelink.vaultcore.azure.net"
 
 }
 
@@ -10,10 +10,12 @@ resource "azurerm_private_dns_zone" "ais_dns" {
     tags = merge(
         var.default_tags,
         {
+            /*
             logicalResourceName = local.ais_dns_name
             UsedBy = "DNS zone for the network"
             Description = "Private dns zone for the network"
             TerraformReference = "azurerm_private_dns_zone.ais_dns_name"
+            */
         }
     )
 }
@@ -107,13 +109,13 @@ variable "private_endpoint_dns_list" {
             private_link = "privatelink.vaultcore.azure.net",
             name = "privatelink.vaultcore.azure.net"
         },
-        storage_dfs = {
-            private_link = "privatelink.dfs.core.windows.net",
-            name = "privatelink.dfs.core.windows.net"
-        },
-        storage_blob = {
-            private_link = "privatelink.blob.core.windows.net",
-            name = "privatelink.blob.core.windows.net"
-        },
+        # storage_dfs = {
+        #     private_link = "privatelink.dfs.core.windows.net",
+        #     name = "privatelink.dfs.core.windows.net"
+        # },
+        # storage_blob = {
+        #     private_link = "privatelink.blob.core.windows.net",
+        #     name = "privatelink.blob.core.windows.net"
+        # },
     }
 }

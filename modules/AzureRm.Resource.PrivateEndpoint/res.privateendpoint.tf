@@ -1,4 +1,3 @@
-
 locals {
     private_endpoint_name = "pvt-endpoint-${var.resource_name}-${var.sub_resource_name}"
 }
@@ -44,7 +43,7 @@ resource "azurerm_private_dns_a_record" "private_endpoint_a_record" {
     name                        = var.resource_name
     zone_name                   = var.dns_a_record_zone_name
     resource_group_name         = var.resource_group_name
-    ttl                         = 300
+    ttl                         = 3600
 
     depends_on = [
         azurerm_private_endpoint.private_endpoint,
@@ -68,6 +67,7 @@ resource "azurerm_private_dns_a_record" "private_endpoint_a_record" {
 
 
 #Setup CName to route the traffic over the private endpoint
+/*
 resource "azurerm_private_dns_cname_record" "private_endpoint_cname" {
     name                    = var.host_name
     zone_name               = var.dns_c_name_zone_name
@@ -85,3 +85,4 @@ resource "azurerm_private_dns_cname_record" "private_endpoint_cname" {
         }
     )
 }
+*/
