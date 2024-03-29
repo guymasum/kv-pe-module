@@ -1,5 +1,5 @@
 locals {
-    key_vault_name = "${local.prefix_keyvault}-${local.product_name}-${var.environment_name}"
+    key_vault_name = "${local.prefix_keyvault}-${local.product_name}-${organization}-${var.environment_name}"
     key_vault_firewall_allow_list = [ local.build_agent_ip ]
 
     keyvault_private_link = var.private_endpoint_dns_list["keyvault"].private_link
