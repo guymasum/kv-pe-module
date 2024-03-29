@@ -65,7 +65,7 @@ module "keyvault_private_endpoint" {
     resource_group_location         = azurerm_key_vault.ais_key_vault.location
     resource_name                   = azurerm_key_vault.ais_key_vault.name
     resource_id                     = azurerm_key_vault.ais_key_vault.id
-    private_endpoint_subnet_id      = azurerm_subnet.private_endpoints.id
+    private_endpoint_subnet_id      = data.azurerm_subnet.private_endpoints.id
     sub_resource_name               = "vault"
 
     dns_c_name_zone_name            = azurerm_private_dns_zone.ais_dns.name

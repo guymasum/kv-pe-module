@@ -1,5 +1,5 @@
 locals {
-    organization                            = "ms"
+    organization                            = "imf"
     product_name                            = "terra-automation"
 
     prefix_storage                          = "str"
