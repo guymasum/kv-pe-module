@@ -1,12 +1,12 @@
-# locals {
-#     vnet_name = "${local.prefix_vnet}-${local.organization}-${local.product_name}-${var.environment_name}"
+locals {
+    vnet_name = "${local.prefix_vnet}-${local.organization}-${local.product_name}-${var.environment_name}"
 
-#     vnet_address_space                      = "10.0.0.0/16"
-#     ase_subnet_address                      = "10.0.1.0/24"
-#     private_endpoints_subnet_address        = "10.226.244.0/22"
-#     gateway_subnet_address                  = "10.0.3.0/24"
+    vnet_address_space                      = "10.0.0.0/16"
+    ase_subnet_address                      = "10.0.1.0/24"
+    private_endpoints_subnet_address        = "10.226.244.0/22"
+    gateway_subnet_address                  = "10.0.3.0/24"
 
-# }
+}
 
 
 # resource "azurerm_virtual_network" "ais_vnet" {
