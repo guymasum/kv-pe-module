@@ -7,5 +7,5 @@ data "azurerm_resource_group" "ais_resource_group" {
 
 
 data "azurerm_resource_group" "ais_kv_resource_group" {
-  name     = var.Kv_resource_group
+  name     = var.kv_resource_group
 }

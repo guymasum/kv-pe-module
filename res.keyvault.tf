@@ -53,7 +53,7 @@ resource "azurerm_role_assignment" "keyvault_admin" {
   scope = azurerm_key_vault.ais_key_vault.id
   role_definition_id = "/subscriptions/8b4e9200-3cc7-4616-85a2-2437458a179f/providers/Microsoft.Authorization/roleDefinitions/00482a5a-887f-4fb3-b363-3b7fe8e74483"
   principal_id = var.admin_user_id
-} 
+}
 
 
 

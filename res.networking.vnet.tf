@@ -49,24 +49,24 @@
 
 
 
-# resource "azurerm_subnet" "private_endpoints" {
-#     name                        = "ais-private-endpoints"
-#     resource_group_name         = data.azurerm_resource_group.ais_resource_group.name
-#     virtual_network_name        = data.azurerm_virtual_network.ais_virtual_network.name
-#     address_prefixes            = [ local.private_endpoints_subnet_address ]
+resource "azurerm_subnet" "private_endpoints" {
+    name                        = "ais-private-endpoints"
+    resource_group_name         = data.azurerm_resource_group.ais_resource_group.name
+    virtual_network_name        = data.azurerm_virtual_network.ais_virtual_network.name
+    address_prefixes            = [ local.private_endpoints_subnet_address ]
 
-#     service_endpoints           = [
-#                                   "Microsoft.KeyVault",
-#                                   "Microsoft.Storage",
-#                                   "Microsoft.Web",
-#                                   "Microsoft.Sql",
-#                                   "Microsoft.AzureActiveDirectory",
-#                                   "Microsoft.EventHub",
-#                                   "Microsoft.AzureCosmosDB"
-#                                 ]
+    service_endpoints           = [
+                                  "Microsoft.KeyVault",
+                                  "Microsoft.Storage",
+                                  "Microsoft.Web",
+                                  "Microsoft.Sql",
+                                  "Microsoft.AzureActiveDirectory",
+                                  "Microsoft.EventHub",
+                                  "Microsoft.AzureCosmosDB"
+                                ]
 
-#     private_link_service_network_policies_enabled   = true
-#     private_endpoint_network_policies_enabled       = true
+    private_link_service_network_policies_enabled   = true
+    private_endpoint_network_policies_enabled       = true
 
-# }
+}
 
